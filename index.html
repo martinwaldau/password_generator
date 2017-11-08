@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Pronouncable Password Generator</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+</head>
+
+<body>
+	<div class="jumbotron jumbotron-fluid">
+		<div class="container">
+			<h1 class="display-3">Password Generator</h1>
+			<p class="lead">This snippet generates pronouncable passwords which should be easier to remember.</p>
+		</div>
+	</div>
+
+	<div class="container-fluid">
+	    <div class="row">
+			<div class="col">&nbsp;</div>
+		</div>
+
+	    <div class="row">
+	    	<div class="col-md-2">&nbsp;</div>
+	    	<div class="col-md-3">
+	    		<h2>Password List</h2>
+	    		<ul id="passwordList">
+	    			<li>Click "Generate" to generate a batch of passwords.</li>
+	    		</ul>
+	    	</div>
+	    	<div class="col-md-auto">
+	    		<form id="formConfig">
+					<div class="btn-group" id="formPasswordLength" role="group">
+						<button type="button" class="btn btn-default">8</button>
+						<button type="button" class="btn btn-default">10</button>
+						<button type="button" class="btn btn-default">12</button>
+						<button type="button" class="btn btn-default">14</button>
+					</div>
+					<div class="checkbox diasbled">
+						<label>
+							<input type="checkbox" value="" checked disabled>
+							Use lowercase a-z
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="1" checked id="formUppercase">
+							Use uppercase A-Z
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="1" checked id="formSpecialChars">
+							Add special characters [+*.,;:-_#]
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="1" checked id="formNumbers">
+							Add numbers 0-9
+						</label>
+					</div>
+	    		</form>
+	    		<a class="btn btn-primary btn-lg" href="#" id="generateButton" role="button">Generate</a>
+	    	</div>
+	    </div>
+	</div>
+
+  <script src="js/generator.js"></script>
+  <script language="Javascript" type="text/javascript">
+  	document.getElementById('generateButton').addEventListener('click', function(event) {
+		Generator.generate();
+		this.blur();
+	});
+
+  	var activeBtn = null;
+  	var activeBtnClass = "btn-info";
+	document.getElementById('formPasswordLength').addEventListener('click', function(event)
+	{
+		Generator.setPasswordLength(event.target.firstChild.data);
+
+		event.target.attributes.class.nodeValue = event.target.attributes.class.nodeValue + ' ' + activeBtnClass;
+		if (activeBtn != null)
+			activeBtn.attributes.class.nodeValue = activeBtn.attributes.class.nodeValue.replace(activeBtnClass, '');
+		activeBtn = event.target;
+		event.target.blur();
+	});
+
+	document.getElementById('formConfig').addEventListener('click', function(event) {
+		if (event.target.nodeName == 'INPUT')
+		{
+			switch(event.target.id)
+			{
+				case 'formUppercase':
+					Generator.setUseCapitalization(event.target.checked);
+				break;
+
+				case 'formSpecialChars':
+					Generator.setUseSpecialChars(event.target.checked);
+				break;
+
+				case 'formNumbers':
+					Generator.setUseNumbers(event.target.checked);
+				break;
+			}
+		}
+		this.blur();
+	});
+
+  	Generator.setPasswordListElement(document.getElementById('passwordList'));
+  	Generator.generate();
+  </script>
+</body>
+</html>
