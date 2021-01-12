@@ -5,8 +5,9 @@ var Generator = {
 	specialConsonants: ['sch', 'ch', 'st', 'th', 'tt', 'pp', 'tz'],
 	numbers: '0123456789',
 	specialChars: '+*.,;:-_#',
-	pwdLength: 14,
-	amount: 10,
+	groupLength: 0,
+	groupAmount: 0,
+	passwordListLength: 15,
 	useCapitalization: true,
 	useSpecialChars: true,
 	useNumbers: true,
@@ -18,9 +19,14 @@ var Generator = {
 		this.passwordListElement = element;
 	},
 
-	setPasswordLength: function(length)
+	setGroupLength: function(length)
 	{
-		this.pwdLength = length;
+		this.groupLength = parseInt(length);
+	},
+
+	setGroupAmount: function(length)
+	{
+		this.groupAmount = parseInt(length);
 	},
 
 	setUseCapitalization: function(value)
@@ -51,9 +57,16 @@ var Generator = {
 			this.passwordListElement.removeChild(this.passwordListElement.firstChild);
 		}
 
-		for(var i = 0; i < passwords.length; i++)
+		for(let i = 0; i < passwords.length; i++)
 		{
-			var node = document.createElement('li');
+			let node = document.createElement('button');
+			node.setAttribute('type', 'button');
+			node.classList.add('btn');
+			node.classList.add('btn-outline-secondary');
+			let glyph = document.createElement('i');
+			glyph.classList.add('bi');
+			glyph.classList.add('bi-clipboard');
+			node.appendChild(glyph);
 			node.appendChild(document.createTextNode(passwords[i]));
 			this.passwordListElement.appendChild(node);	
 		}
@@ -61,54 +74,58 @@ var Generator = {
 
 	generatePasswords: function()
 	{
+		return this._generateGroupBasedPasswords();
+	},
+
+	_generateGroupBasedPasswords: function()
+	{
 		var passwords = [];
-		while(passwords.length < this.amount)
+		let safety = this.passwordListLength * 2;
+		let runs = 0;
+		while(passwords.length < this.passwordListLength || runs > safety)
 		{
-			var password = '';
-			var previous = this.getDirection();
-			var reduceLength = 3;
-			if (!this.useNumbers)
-				reduceLength -= 2;
-			if (!this.useSpecialChars)
-				reduceLength -= 1;
-
-			while(password.length < this.pwdLength - reduceLength)
+			let password = '';
+			runs++;
+			for (var i = 0; i < this.groupAmount; i++)
 			{
-				var capitalize = (this.getDirection() == 1 && this.useCapitalization) ? true : false;
-				if (previous == 0)
+				let passwordSection = '';
+				let previous = 0;
+				let groupSafety = this.groupLength * 2;
+				let groupRuns = 0;
+				while(passwordSection.length < this.groupLength || groupRuns > groupSafety)
 				{
-					if (this.getDirection() == 0)
+					groupRuns++;
+					let capitalize = (this.getDirection() == 1 && this.useCapitalization) ? true : false;
+					if (previous == 0)
 					{
-						password += this.getRandomChar(this.vowels, capitalize, password);
+						if (this.getDirection() == 0)
+						{
+							passwordSection += this.getRandomChar(this.vowels, capitalize, passwordSection);
+						}
+						else
+						{
+							passwordSection += this.getRandomChar(this.specialVowels, false, passwordSection);
+						}
+						previous = 1;
 					}
 					else
 					{
-						password += this.getRandomChar(this.specialVowels, false, password);
+						if (this.getDirection() == 0)
+						{
+							passwordSection += this.getRandomChar(this.consonants, capitalize, passwordSection);
+						}
+						else
+						{
+							passwordSection += this.getRandomChar(this.specialConsonants, false, passwordSection);
+						}
+						previous = 0;
 					}
-					previous = 1;
 				}
-				else
-				{
-					if (this.getDirection() == 0)
-					{
-						password += this.getRandomChar(this.consonants, capitalize, password);
-					}
-					else
-					{
-						password += this.getRandomChar(this.specialConsonants, false, password);
-					}
-					previous = 0;
-				}
+				passwordSection = passwordSection.substring(0, this.groupLength);
+				password += passwordSection  + "-";
 			}
-
-			if (this.useSpecialChars)
-				password += this.getRandomChar(this.specialChars, false, password);
-			if (this.useNumbers)
-			{
-				password += this.getRandomChar(this.numbers, false, password);
-				password += this.getRandomChar(this.numbers, false, password);
-			}
-			passwords.push(password.substring(0, this.pwdLength));
+			password = password.substring(0, password.length - 1);
+			passwords.push(password);
 		}
 		return passwords;
 	},

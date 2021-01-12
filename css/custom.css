@@ -1,0 +1,10 @@
+#passwordList .bi
+{
+    visibility: hidden;
+    margin-right: 1em;
+}
+
+#passwordList button:hover .bi, #passwordList button:focus .bi
+{
+    visibility:visible;
+}
