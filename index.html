@@ -25,37 +25,34 @@
 		</div>
 
 		<div class="row justify-content-center" id="formConfig">
-			<div class="col-md-1">
+			<div class="col-md-1 bg-light">
 				<p>Length of each section:</p>
 				<div class="btn-group" id="groupLength" role="group">
-					<button type="button" class="btn btn-default">4</button>
-					<button type="button" class="btn btn-default">6</button>
-					<button type="button" class="btn btn-default">8</button>
+					<button type="button" class="btn btn-secondary">4</button>
+					<button type="button" class="btn btn-secondary">6</button>
+					<button type="button" class="btn btn-secondary">8</button>
 				</div>
 			</div>
 
-			<div class="col-md-1">
+			<div class="col-md-1 bg-light">
 				<p>Amount of sections:</p>
 				<div class="btn-group" id="groupAmount" role="group">
-					<button type="button" class="btn btn-default">3</button>
-					<button type="button" class="btn btn-default">4</button>
-					<button type="button" class="btn btn-default">5</button>
-					<button type="button" class="btn btn-default">6</button>
+					<button type="button" class="btn btn-secondary">3</button>
+					<button type="button" class="btn btn-secondary">4</button>
+					<button type="button" class="btn btn-secondary">5</button>
+					<button type="button" class="btn btn-secondary">6</button>
 				</div>
 			</div>
 
-			<div class="col-md-1">
-				<div class="checkbox diasbled">
-					<label>
-						<input type="checkbox" value="" checked disabled>
-						Use lowercase a-z
-					</label>
+			<div class="col-md-1 bg-light">
+				<div class="form-check form-switch">
+					<input class="form-check-input" type="checkbox" id="formLowercase" checked disabled>
+					<label class="form-check-label" for="formLowercase">Use lowercase a-z</label>
 				</div>
-				<div class="checkbox">
-					<label>
-						<input type="checkbox" value="1" checked id="formUppercase">
-						Use uppercase A-Z
-					</label>
+
+				<div class="form-check form-switch">
+					<input class="form-check-input" type="checkbox" id="formUppercase" value="1" checked>
+					<label class="form-check-label" for="formUppercase">Use uppercase A-Z</label>
 				</div>
 				<!--
 				<div class="checkbox">
@@ -80,7 +77,7 @@
 
 		<div class="row justify-content-center">
 			<div class="col-md-1">
-				<a class="btn btn-primary btn-lg" href="#" id="generateButton" role="button">Generate</a>
+				<a class="btn btn-info btn-lg" href="#" id="generateButton" role="button">Generate</a>
 			</div>
 		</div>
 
@@ -90,7 +87,8 @@
 
 	    <div class="row justify-content-center">
 	    	<div class="col-md-4">
-				<h2>Password List</h2>
+				<h2>Generated Password List</h2>
+				<p>Click on a password to copy to clipboard.</p>
 				<div class="list-group" id="passwordList">
 				</div>
 	    	</div>
