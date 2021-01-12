@@ -7,7 +7,7 @@ var Generator = {
 	specialChars: '+*.,;:-_#',
 	groupLength: 0,
 	groupAmount: 0,
-	passwordListLength: 15,
+	passwordListLength: 10,
 	useCapitalization: true,
 	useSpecialChars: true,
 	useNumbers: true,
