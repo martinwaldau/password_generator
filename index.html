@@ -162,7 +162,7 @@
 		{
 			event.target.children[0].classList.remove('bi-clipboard');
 			event.target.children[0].classList.add('bi-clipboard-check');
-			let password = event.target.firstChild.data;	
+			let password = event.target.textContent;	
 			navigator.clipboard.writeText(password)
             .then(() => {
               //success
