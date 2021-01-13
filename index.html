@@ -24,7 +24,7 @@
 			</div>
 		</div>
 
-		<div class="row justify-content-center" id="formConfig">
+		<div class="row justify-content-center">
 			<div class="col-lg-2 bg-light mt-">
 				<label>Length of each section:<br />
 					<div class="btn-group" id="groupLength" role="group">
@@ -46,7 +46,7 @@
 				</label>
 			</div>
 
-			<div class="col-lg-2 bg-light mt-2">
+			<div class="col-lg-2 bg-light mt-2" id="formConfig">
 				<label>characters used:<br />
 					<div class="form-check form-switch">
 						<input class="form-check-input" type="checkbox" id="formLowercase" checked disabled>
@@ -57,20 +57,11 @@
 						<input class="form-check-input" type="checkbox" id="formUppercase" value="1" checked>
 						<label class="form-check-label" for="formUppercase">Use uppercase A-Z</label>
 					</div>
-					<!--
-					<div class="checkbox">
-						<label>
-							<input type="checkbox" value="0" checked id="formSpecialChars">
-							Add special characters [+*.,;:-_#]
-						</label>
+
+					<div class="form-check form-switch">
+						<input class="form-check-input" type="checkbox" id="formL33tify" >
+						<label class="form-check-label" for="formL33tify">l33tify passwords</label>
 					</div>
-					<div class="checkbox">
-						<label>
-							<input type="checkbox" value="0" checked id="formNumbers">
-							Add numbers 0-9
-						</label>
-					</div>
-					-->
 				</label>
 			</div>
 		</div>
@@ -154,12 +145,8 @@
 						Generator.setUseCapitalization(event.target.checked);
 					break;
 
-					case 'formSpecialChars':
-						Generator.setUseSpecialChars(event.target.checked);
-					break;
-
-					case 'formNumbers':
-						Generator.setUseNumbers(event.target.checked);
+					case 'formL33tify':
+						Generator.setLeetify(event.target.checked);
 					break;
 				}
 			}

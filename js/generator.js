@@ -3,14 +3,12 @@ var Generator = {
 	consonants: 'abcdfghjklmnpqrstvwxyz',
 	specialVowels: ['ei', 'ie', 'eu', 'ou'],
 	specialConsonants: ['sch', 'ch', 'st', 'th', 'tt', 'pp', 'tz'],
-	numbers: '0123456789',
-	specialChars: '+*.,;:-_#',
+	leetReplacements: {'e': 3, 'a': 4, 'i': 1, 's': 5, 't': 7, 'o': 0},
 	groupLength: 0,
 	groupAmount: 0,
 	passwordListLength: 10,
 	useCapitalization: true,
-	useSpecialChars: true,
-	useNumbers: true,
+	useLeetify: false,
 	passwordListElement: null,
 	maxRandomAttempts: 2,
 
@@ -34,14 +32,9 @@ var Generator = {
 		this.useCapitalization = (value == true);
 	},
 
-	setUseSpecialChars: function(value)
+	setLeetify: function(value)
 	{
-		this.useSpecialChars = (value == true);
-	},
-
-	setUseNumbers: function(value)
-	{
-		this.useNumbers = (value == true);
+		this.useLeetify = (value == true);
 	},
 
 	generate: function()
@@ -125,6 +118,17 @@ var Generator = {
 				password += passwordSection  + "-";
 			}
 			password = password.substring(0, password.length - 1);
+			if (this.useLeetify)
+			{
+				for(let i = 0; i < password.length; i++)
+				{
+					if (this.leetReplacements.hasOwnProperty(password[i]))
+					{
+						password = password.replace(password[i], this.leetReplacements[password[i]]);
+					}
+				}
+			}
+
 			passwords.push(password);
 		}
 		return passwords;
