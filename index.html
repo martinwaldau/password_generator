@@ -24,7 +24,7 @@
 		</div>
 
 		<div class="row justify-content-center">
-			<div class="col-lg-2 bg-light mt-">
+			<div class="col-lg-2 bg-light mt-2">
 				<label>Length of each section:<br />
 					<div class="btn-group" id="groupLength" role="group">
 						<button type="button" class="btn btn-secondary">4</button>
@@ -58,7 +58,7 @@
 					</div>
 
 					<div class="form-check form-switch">
-						<input class="form-check-input" type="checkbox" id="formL33tify" >
+						<input class="form-check-input" type="checkbox" id="formL33tify" checked>
 						<label class="form-check-label" for="formL33tify">l33tify passwords</label>
 					</div>
 				</label>
@@ -182,14 +182,14 @@
 			bubbles: true,
 			cancelable: true
 		});
-		document.querySelector("div#groupLength").children[1].dispatchEvent(lengthEvent);
+		document.querySelector("div#groupLength").children[2].dispatchEvent(lengthEvent);
 
 		const amountEvent = new MouseEvent('click', {
 			view: window,
 			bubbles: true,
 			cancelable: true
 		});
-		document.querySelector("div#groupAmount").children[1].dispatchEvent(amountEvent);
+		document.querySelector("div#groupAmount").children[0].dispatchEvent(amountEvent);
 
 		Generator.setPasswordListElement(document.getElementById('passwordList'));
 		Generator.generate();
