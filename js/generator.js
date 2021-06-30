@@ -8,7 +8,7 @@ var Generator = {
 	groupAmount: 0,
 	passwordListLength: 10,
 	useCapitalization: true,
-	useLeetify: false,
+	useLeetify: true,
 	passwordListElement: null,
 	maxRandomAttempts: 2,
 
