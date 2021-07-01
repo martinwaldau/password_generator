@@ -25,24 +25,22 @@
 
 		<div class="row justify-content-center">
 			<div class="col-lg-2 bg-light mt-2">
-				<label>Length of each section:<br />
-					<div class="btn-group" id="groupLength" role="group">
-						<button type="button" class="btn btn-secondary">4</button>
-						<button type="button" class="btn btn-secondary">6</button>
-						<button type="button" class="btn btn-secondary">8</button>
-					</div>
-				</label>
+				<label>Length of each section:</label>
+				<div class="btn-group" id="groupLength" role="group">
+					<button type="button" class="btn btn-secondary">4</button>
+					<button type="button" class="btn btn-secondary">6</button>
+					<button type="button" class="btn btn-secondary">8</button>
+				</div>
 			</div>
 
 			<div class="col-lg-2 bg-light mt-2">
-				<label>Amount of sections:<br />
-					<div class="btn-group" id="groupAmount" role="group">
-						<button type="button" class="btn btn-secondary">3</button>
-						<button type="button" class="btn btn-secondary">4</button>
-						<button type="button" class="btn btn-secondary">5</button>
-						<button type="button" class="btn btn-secondary">6</button>
-					</div>
-				</label>
+				<label>Amount of sections:</label>
+				<div class="btn-group" id="groupAmount" role="group">
+					<button type="button" class="btn btn-secondary">3</button>
+					<button type="button" class="btn btn-secondary">4</button>
+					<button type="button" class="btn btn-secondary">5</button>
+					<button type="button" class="btn btn-secondary">6</button>
+				</div>
 			</div>
 
 			<div class="col-lg-2 bg-light mt-2" id="formConfig">
@@ -109,6 +107,13 @@
 		document.getElementById('groupLength').addEventListener('click', function(event)
 		{
 			Generator.setGroupLength(event.target.firstChild.data);
+			event.target.blur();
+
+			if (event.target.classList.contains(activeBtnClass))
+			{
+				return;
+			}
+
 			event.target.classList.add(activeBtnClass);
 
 			if (curActiveLengthBtn != null)
@@ -116,13 +121,18 @@
 				curActiveLengthBtn.classList.remove(activeBtnClass);
 			}
 			curActiveLengthBtn = event.target;
-
-			event.target.blur();
 		});
 
 		document.getElementById('groupAmount').addEventListener('click', function(event)
 		{
 			Generator.setGroupAmount(event.target.firstChild.data);
+			event.target.blur();
+
+			if (event.target.classList.contains(activeBtnClass))
+			{
+				return;
+			}
+
 			event.target.classList.add(activeBtnClass);
 
 			if (curActiveAmountBtn != null)
@@ -130,8 +140,6 @@
 				curActiveAmountBtn.classList.remove(activeBtnClass);
 			}
 			curActiveAmountBtn = event.target;
-
-			event.target.blur();
 		});
 
 		document.getElementById('formConfig').addEventListener('click', function(event) {
