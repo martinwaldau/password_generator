@@ -98,7 +98,6 @@
 
 	document.addEventListener("DOMContentLoaded", function()
 	{
-
 		document.getElementById('generateButton').addEventListener('click', function(event) {
 			Generator.generate();
 			this.blur();
@@ -190,14 +189,14 @@
 			bubbles: true,
 			cancelable: true
 		});
-		document.querySelector("div#groupLength").children[2].dispatchEvent(lengthEvent);
+		document.querySelector("div#groupLength").children[0].dispatchEvent(lengthEvent);
 
 		const amountEvent = new MouseEvent('click', {
 			view: window,
 			bubbles: true,
 			cancelable: true
 		});
-		document.querySelector("div#groupAmount").children[0].dispatchEvent(amountEvent);
+		document.querySelector("div#groupAmount").children[2].dispatchEvent(amountEvent);
 
 		Generator.setPasswordListElement(document.getElementById('passwordList'));
 		Generator.generate();
